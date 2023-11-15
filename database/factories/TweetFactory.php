@@ -12,7 +12,8 @@ class TweetFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 1,
+
+            'user_id' => \App\Models\User::all()->random()->id,
             'content' => $this->faker->sentence,
 
         ];
