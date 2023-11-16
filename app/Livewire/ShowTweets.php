@@ -28,13 +28,22 @@ class ShowTweets extends Component
     {
         $this->validate();
 
-
-        $user = auth()->user();
-
-        $user->tweets()->create([
+        auth()->user()->tweets()->create([
             'content' => $this->content,
         ]);
 
         $this->content = '';
+    }
+
+    public function like(Tweet $tweet): void
+    {
+        $tweet->likes()->create([
+            'user_id' => auth()->id(),
+        ]);
+    }
+
+    public function unlike(Tweet $tweet): void
+    {
+        $tweet->likes()->delete();
     }
 }
